@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.css": "/Portfolio/static/css/main.7bd9f16c.css",
+    "main.js": "/Portfolio/static/js/main.01b99e3e.js",
+    "static/media/r.png": "/Portfolio/static/media/r.a05f0d1389387a91a676.png",
+    "static/media/php.png": "/Portfolio/static/media/php.1f32f22bff6c373c52fc.png",
+    "static/media/csharp.png": "/Portfolio/static/media/csharp.027bbf37466d07c18fbf.png",
+    "static/media/sunlife.png": "/Portfolio/static/media/sunlife.5965f7730b78184e2a78.png",
+    "static/media/amr.jpg": "/Portfolio/static/media/amr.5ea6f37e89f31f7bdfaa.jpg",
+    "static/media/figma.png": "/Portfolio/static/media/figma.b08682c3a0753f59813f.png",
+    "static/media/sql.jpg": "/Portfolio/static/media/sql.a6bdc2ace2b9e1254568.jpg",
+    "static/media/tailwind.png": "/Portfolio/static/media/tailwind.8419a8f0171ae83da5ef.png",
+    "static/media/sqlserver.png": "/Portfolio/static/media/sqlserver.7319e602c1c6bb14857e.png",
+    "static/media/kaneff.png": "/Portfolio/static/media/kaneff.cf2240a105c5a94b7f64.png",
+    "static/media/hadoop.png": "/Portfolio/static/media/hadoop.530b67a2ced98c897cd7.png",
+    "static/media/tableau.png": "/Portfolio/static/media/tableau.802f8cc91c189ac232f9.png",
+    "static/media/hive.png": "/Portfolio/static/media/hive.70037fde4f6ba7db9c4e.png",
+    "static/media/springboot.png": "/Portfolio/static/media/springboot.94f201ce44348763e6a5.png",
+    "static/media/sheridan.jpg": "/Portfolio/static/media/sheridan.7369e98d592d07fc29ea.jpg",
+    "static/media/slack.png": "/Portfolio/static/media/slack.0c70ae08030483b5c6ff.png",
+    "static/media/react.png": "/Portfolio/static/media/react.2bb9e0e4d21a754e57e3.png",
+    "static/media/flask.png": "/Portfolio/static/media/flask.cdff1b33a37d8054aee8.png",
+    "static/media/spark.png": "/Portfolio/static/media/spark.31f2ba40c0f6e204e279.png",
+    "static/media/django.png": "/Portfolio/static/media/django.1561b91d7b75f3ca2814.png",
+    "static/media/bootstrap.png": "/Portfolio/static/media/bootstrap.1d0c22359561b9ebbfcb.png",
+    "static/media/oxford.jpg": "/Portfolio/static/media/oxford.2469924f1d23a0fa7bee.jpg",
+    "static/media/node.png": "/Portfolio/static/media/node.33f66c0643c9b607a0c2.png",
+    "static/media/jupyter.png": "/Portfolio/static/media/jupyter.2947e75c42b14511cee3.png",
+    "static/media/java.png": "/Portfolio/static/media/java.1b6036a22a66e2bc9e13.png",
+    "index.html": "/Portfolio/index.html",
+    "main.7bd9f16c.css.map": "/Portfolio/static/css/main.7bd9f16c.css.map",
+    "main.01b99e3e.js.map": "/Portfolio/static/js/main.01b99e3e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7bd9f16c.css",
+    "static/js/main.01b99e3e.js"
+  ]
+}
