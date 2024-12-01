@@ -13,6 +13,7 @@
     "@testing-library/react": "^14.1.2",
     "@testing-library/user-event": "^14.5.2",
     "emailjs": "^4.0.3",
+    "gh-pages": "^6.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
@@ -48,7 +49,7 @@
     ]
   },
   "devDependencies": {
-    "@iconify/react": "^4.1.1",
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@iconify/react": "^4.1.1"
   }
 }
