@@ -1,10 +1,10 @@
 export const Bio = {
     name: "Amr Abdelwahed",
     roles: [
-      "Full Stack Developer.",
       "Software Engineer.",
-      "Data Scientist.",
       "Machine Learning Developer.",
+      "Data Engineer.",
+      "Full Stack Developer.",
     ],
     github: "https://github.com/amrabdelwahed",
     resume: "https://drive.google.com/file/d/1lF5Ph9wFySi8gOv-YZ3VzP2lS2097aGM/view?usp=sharing",
@@ -238,6 +238,24 @@ export const Bio = {
       ],
       category: "web",
       link: "https://docusafe.online/"
+    },
+    {
+      id: 1,
+      title: "Remmi",
+      date: "May 2023 - July 2024",
+      description:
+        "Remmi is an innovative voice reminder app developed with Swift, designed to help users stay organized effortlessly. Powered by advanced AI technology, Remmi enables users to create and manage audible reminders with natural voice prompts, ensuring they never miss a task or event.",
+      image:
+        require('../images/remmi.png'),
+      tags: [
+        "Swift",
+        "SwiftUI",
+        "UIKit",
+        "MongoDB",
+        "Firebase",
+      ],
+      category: "mobile",
+      link: "https://apps.apple.com/ca/app/remmi/id6499106472"
     }
     
   ];

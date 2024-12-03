@@ -41,10 +41,12 @@ const Card = styled.div`
 const Image = styled.img`
     width: 100%;
     height: 180px;
+    object-fit: cover; /* Ensures the image covers the set dimensions */
     background-color: ${({ theme }) => theme.white};
     border-radius: 10px;
     box-shadow: 0 0 16px 2px rgba(0,0,0,0.3);
-`
+`;
+
 
 const Tags = styled.div`
     width: 100%;
@@ -70,7 +72,9 @@ const Details = styled.div`
     flex-direction: column;
     gap: 0px;
     padding: 0px 2px;
-`
+    max-height: 200px; /* Example value */
+`;
+
 const Title = styled.div`
     font-size: 20px;
     font-weight: 600;
@@ -102,9 +106,12 @@ const Description = styled.div`
     margin-top: 12px;
     display: -webkit-box;
     max-width: 100%;
-    max-height: 100%;
+    max-height: 4.5em; /* Adjust based on design */
     line-height: 1.5;
-`
+    -webkit-line-clamp: 8; /* Consistently clamp to 3 lines */
+    -webkit-box-orient: vertical;
+`;
+
 
 const ProjectCard = ({ project }) => {
     const handleCardClick = () => {
@@ -115,9 +122,10 @@ const ProjectCard = ({ project }) => {
         <Card onClick={handleCardClick}>
           <Image src={project.image} />
           <Tags>
-            {project.tags?.map((tag, index) => (
-              <Tag key={index}>{tag}</Tag>
+            {project.tags?.slice(0, 9).map((tag, index) => (
+                <Tag key={index}>{tag}</Tag>
             ))}
+
           </Tags>
           <Details>
             <Title>{project.title}</Title>
