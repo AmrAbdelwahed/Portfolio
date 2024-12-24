@@ -223,7 +223,7 @@ export const Bio = {
     {
       id: 0,
       title: "Docusafe",
-      date: "Sept 2023 - Dec 2024",
+      date: "Sep 2023 - Dec 2024",
       description:
         "DocuSafe is an AI-driven platform that creates unique digital signature profiles by scanning and analyzing multiple samples of a user's signature. By linking each verified signature to the sender's account, DocuSafe ensures secure, traceable document authentication for businesses and individuals needing reliable verification.",
       image:
@@ -256,6 +256,24 @@ export const Bio = {
       ],
       category: "mobile",
       link: "https://apps.apple.com/ca/app/remmi/id6499106472"
+    },
+    {
+      id: 0,
+      title: "SoccerEdge",
+      date: "Sep 2024 - Dec 2024",
+      description:
+        "This repository contains a machine learning model designed to predict the outcome of Premier League soccer matches. Utilizing historical data, the model analyzes various factors such as team performance, player statistics, and match conditions to forecast the most likely result",
+      image:
+        require('../images/SoccerEdge.png'),
+      tags: [
+        "Python",
+        "TensorFlow",
+        "StreamLit",
+        "SciKit-Learn",
+        "Pandas"
+      ],
+      category: "web",
+      link: "https://amrabdelwahed-the-football-fortune-teller-app-05nkzh.streamlit.app/"
     }
-    
+ 
   ];
