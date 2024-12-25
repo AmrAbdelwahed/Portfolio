@@ -258,7 +258,7 @@ export const Bio = {
       link: "https://apps.apple.com/ca/app/remmi/id6499106472"
     },
     {
-      id: 0,
+      id: 2,
       title: "SoccerEdge",
       date: "Sep 2024 - Dec 2024",
       description:
@@ -274,6 +274,24 @@ export const Bio = {
       ],
       category: "web",
       link: "https://amrabdelwahed-the-football-fortune-teller-app-05nkzh.streamlit.app/"
+    },
+    {
+      id: 3,
+      title: "StreamlinePay (preview)",
+      date: "Sep 2024 - Dec 2024",
+      description:
+        "StreamlinePay is a financial transaction management system built with Java, Spring Boot, MongoDB, and Kafka. It allows users to create and manage transactions, with real-time messaging powered by Kafka. Docker is employed to containerize the application for easy deployment and scalability. This deployment is a preview of the core functionality.",
+      image:
+        require('../images/StreamlinePay.png'),
+      tags: [
+        "Java",
+        "Spring Boot",
+        "MongoDB",
+        "Kafka",
+        "Docker"
+      ],
+      category: "web",
+      link: "https://financial-transaction-processing-system.vercel.app/"
     }
  
   ];
