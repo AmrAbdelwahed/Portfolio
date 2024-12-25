@@ -280,7 +280,7 @@ export const Bio = {
       title: "StreamlinePay (preview)",
       date: "Sep 2024 - Dec 2024",
       description:
-        "StreamlinePay is a financial transaction management system built with Java, Spring Boot, MongoDB, and Kafka. It allows users to create and manage transactions, with real-time messaging powered by Kafka. Docker is employed to containerize the application for easy deployment and scalability. This deployment is a preview of the core functionality.",
+        "StreamlinePay is a financial transaction management system built with Java, Spring Boot, MongoDB, and Kafka. It allows users to create and manage transactions, with real-time messaging powered by Kafka. Docker is used to containerize the application for easy deployment and scalability. This deployment is a preview.",
       image:
         require('../images/StreamlinePay.png'),
       tags: [

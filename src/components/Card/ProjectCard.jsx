@@ -15,7 +15,7 @@ const Button = styled.button`
     transition: all 0.8s ease-in-out;
 `
 const Card = styled.div`
-    width: 330px;
+    width: 350px;
     height: auto;
     cursor: pointer;
     border: 0.1px solid ${({ theme }) => theme.white};
@@ -40,7 +40,7 @@ const Card = styled.div`
 
 const Image = styled.img`
     width: 100%;
-    height: 180px;
+    height: 220px;
     object-fit: cover; /* Ensures the image covers the set dimensions */
     background-color: ${({ theme }) => theme.white};
     border-radius: 10px;
@@ -72,7 +72,7 @@ const Details = styled.div`
     flex-direction: column;
     gap: 0px;
     padding: 0px 2px;
-    max-height: 200px; /* Example value */
+    max-height: 500px; /* Example value */
 `;
 
 const Title = styled.div`
@@ -106,11 +106,12 @@ const Description = styled.div`
     margin-top: 12px;
     display: -webkit-box;
     max-width: 100%;
-    max-height: 4.5em; /* Adjust based on design */
-    line-height: 1.5;
-    -webkit-line-clamp: 8; /* Consistently clamp to 3 lines */
+    max-height: none; /* No longer limit the height */
+    line-height: 1.6; /* Slightly increase line height for better readability */
+    -webkit-line-clamp: 9s; /* Remove clamping */
     -webkit-box-orient: vertical;
 `;
+
 
 
 const ProjectCard = ({ project }) => {
