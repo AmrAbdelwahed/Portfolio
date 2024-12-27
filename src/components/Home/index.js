@@ -1,15 +1,19 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Bio } from '../../data/constants';
+import React from 'react';
+import { useCallback } from 'react';
+import Particles from "react-tsparticles";
+import { loadFull } from "tsparticles";
+import { motion } from "framer-motion";
+import styled from 'styled-components';
 import Typewriter from 'typewriter-effect';
-import HomeImg from '../../images/amr.jpg'
+import { Bio } from '../../data/constants';
+import HomeImg from '../../images/amr.jpg';
 
-export const HomeContainer = styled.div`
+const HomeContainer = styled.div`
   background: ${({ theme }) => theme.Bg};
-  display: flex;
-  justify-content: center;
   position: relative;
   height: calc(100vh - 100px);
+  display: flex;
+  justify-content: center;
   @media (max-width: 960px) {
     padding: 66px 16px;
   }
@@ -224,46 +228,166 @@ const HomeButton = styled.a`
     }
 `;
 
+// Add ParticlesContainer to ensure particles are visible
+const ParticlesContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+`;
+
 const ButtonWrapper = styled.div`
     
     display: flex;
     gap: 20px;  
 `;
 
+
 const Home = () => {
+  const particlesInit = useCallback(async (engine) => {
+    await loadFull(engine);
+  }, []);
+
+  const particlesConfig = {
+    fullScreen: true,
+    particles: {
+      number: {
+        value: 100,  // Increased number of particles
+        density: {
+          enable: true,
+          value_area: 1000
+        }
+      },
+      color: {
+        value: "#64ffda"
+      },
+      links: {
+        enable: true,
+        color: "#64ffda",
+        opacity: 0.4,  // Increased opacity
+        width: 1,
+        distance: 150  // Increased distance between particles
+      },
+      move: {
+        enable: true,
+        speed: 2,  // Increased speed
+        direction: "none",
+        random: true,
+        straight: false,
+        outModes: {
+          default: "bounce"
+        }
+      },
+      size: {
+        value: 2  // Slightly larger particles
+      },
+      opacity: {
+        value: 0.8  // Increased opacity
+      }
+    },
+    interactivity: {
+      events: {
+        onHover: {
+          enable: true,
+          mode: "grab"
+        },
+        onClick: {
+          enable: true,
+          mode: "push"
+        }
+      },
+      modes: {
+        grab: {
+          distance: 140,
+          links: {
+            opacity: 1
+          }
+        },
+        push: {
+          quantity: 4
+        }
+      }
+    },
+    detectRetina: true
+  };
+
   return (
-      <div id="home">
-          <HomeContainer>
-              <HomeInnerContainer>
-                  <HomeLeftContainer id="Left">
-                      <Subtitle>Hello, my name is<br /> </Subtitle>
-                      <Title>{Bio.name}</Title>
-                      <TextLoop>
-                          I am a
-                          <Span>
-                              <Typewriter
-                                  options={{
-                                      strings: Bio.roles,
-                                      autoStart: true,
-                                      loop: true,
-                                  }}
-                              />
-                          </Span>
-                      </TextLoop>
-                      <ButtonWrapper>
-                        <HomeButton href={Bio.resume} target='display'>View Resume</HomeButton>
-                        <HomeButton href='mailto:amrabdelwahed00@gmail.com' target='display'>Contact Me</HomeButton>
-                      </ButtonWrapper>
-                      
-                  </HomeLeftContainer>
-                  <HomeRightContainer id="Right">
-                    <Img src={HomeImg} alt="Home-image" />
-                  </HomeRightContainer>
-              </HomeInnerContainer>
+    <div className="relative h-screen w-full overflow-hidden">
+      <ParticlesContainer>
+        <Particles
+          id="tsparticles"
+          init={particlesInit}
+          options={particlesConfig}
+          style={{
+            width: '100%',
+            height: '100%',
+            position: 'absolute',
+            top: 0,
+            left: 0
+          }}
+        />
+      </ParticlesContainer>
+      
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="relative z-10"
+      >
+        <HomeContainer>
+          <HomeInnerContainer>
+            <HomeLeftContainer>
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <Subtitle>Hello, my name is<br /></Subtitle>
+                <Title>{Bio.name}</Title>
+                <TextLoop>
+                  I am a
+                  <Span>
+                    <Typewriter
+                      options={{
+                        strings: Bio.roles,
+                        autoStart: true,
+                        loop: true,
+                      }}
+                    />
+                  </Span>
+                </TextLoop>
+                <ButtonWrapper>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <HomeButton href={Bio.resume} target='display'>View Resume</HomeButton>
+                  </motion.div>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <HomeButton href='mailto:amrabdelwahed00@gmail.com' target='display'>Contact Me</HomeButton>
+                  </motion.div>
+                </ButtonWrapper>
+              </motion.div>
+            </HomeLeftContainer>
+            <HomeRightContainer>
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                <Img src={HomeImg} alt="Home-image" />
+              </motion.div>
+            </HomeRightContainer>
+          </HomeInnerContainer>
+        </HomeContainer>
+      </motion.div>
+    </div>
+  );
+};
 
-          </HomeContainer>
-      </div>
-  )
-}
-
-export default Home
+export default Home;

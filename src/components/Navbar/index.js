@@ -1,330 +1,218 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link as ScrollLink } from 'react-scroll';
-import { FaBars } from 'react-icons/fa';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import { Icon } from '@iconify/react';
-import styled, { useTheme } from 'styled-components'
+import { FaBars, FaGithub, FaLinkedin } from 'react-icons/fa';
+import styled from 'styled-components';
 
-const Nav = styled.div`
-    background-color: ${({theme}) => theme.bg};
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    @media (max-width: 960px) {
-        transtion: 0.8s all ease;
-    }
+const NavbarContainer = styled(motion.nav)`
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  background: ${({ scrolled }) => scrolled ? 'rgba(25, 25, 36, 0.9)' : 'transparent'};
+  backdrop-filter: ${({ scrolled }) => scrolled ? 'blur(10px)' : 'none'};
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
 `;
 
-const NavContainer = styled.div`
+const Nav = styled.div`
+  max-width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 60px;
-  z-index: 1;
-  width: 100%;
-  padding: 0 24px;
-  max-width: 1200px;
 `;
 
-const NavLogo = styled.a`
-    color: white;
-    width: 80%;    
-    padding: 0 6px;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    text-decoration: none;
-    @media (max-width: 640px) {
-      padding: 0 0px;
-  }
-`;
-
-const NavItems = styled.ul`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content:center;
-    gap: 48px;
-    padding: 0 6px;
-    list-style: none;
-    font-size: 18px;
-
-    @media screen and (max-width: 768px) {
-      display: none;
-    }
-`;
-
-const NavLink = styled(ScrollLink)`
-  color: ${({ theme }) => theme.text_primary};
-  font-weight: 400;
-  cursor: pointer;
-  transition: all 0.1s ease-in-out;
+const Logo = styled.a`
+  color: ${({ theme }) => theme.colors?.primary || '#64ffda'};
+  font-size: 1.5rem;
+  font-weight: bold;
   text-decoration: none;
-
-  &:hover {
-    color: ${({ theme }) => theme.primary};
-  }
 `;
 
-const ButtonContainer = styled.div`
-  width: 80%;  
-  height: 100%;
+const NavLinks = styled.div`
   display: flex;
-  justify-content: end;
   align-items: center;
-  padding: 0 6px;
-  @media screen and (max-width: 768px) {
+  gap: 48px;
+
+  @media (max-width: 768px) {
     display: none;
   }
 `;
 
-const NavIcon = styled.a`
-  
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  height: 70%;
-  color: ${({ theme }) => theme.white};
-  background-color: transparent;
-  cursor: pointer;
-  font-weight: 300;
+const NavLink = styled(ScrollLink)`
+  color: ${({ theme }) => theme.colors?.text || '#e6e6e6'};
+  font-size: 1rem;
   text-decoration: none;
-  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+  transition: color 0.2s ease;
+
   &:hover {
-    color: ${({ theme }) => theme.primary};
-  }
-  @media screen and (max-width: 768px) { 
-  font-size: 14px;
+    color: ${({ theme }) => theme.colors?.primary || '#64ffda'};
   }
 `;
 
-const ButtonWrapper = styled.div`
+const SocialLinks = styled.div`
   display: flex;
+  align-items: center;
+  gap: 24px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const SocialLink = styled.a`
+  color: ${({ theme }) => theme.colors?.text || '#e6e6e6'};
+  font-size: 1.5rem;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors?.primary || '#64ffda'};
+  }
+`;
+
+const MenuButton = styled.button`
+  display: none;
+  color: ${({ theme }) => theme.colors?.text || '#e6e6e6'};
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors?.primary || '#64ffda'};
+  }
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+`;
+
+const MobileMenu = styled(motion.div)`
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  background: rgba(25, 25, 36, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 24px;
 `;
 
-const CollapseIcon = styled.div`
-  display: none;
-  @media screen and (max-width: 768px) {
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(-100%, 60%);
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: ${({ theme }) => theme.text_primary};
-  }
-`;
-
-const CollapseMenu = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 16px;
-    position: absolute;
-    top: 80px;
-    right: 0;
-    width: 100%;
-    padding: 12px 40px 24px 40px;
-    background: ${({ theme }) => theme.bg+99};
-    transition: all 0.6s ease-in-out;
-    transform: ${({ open }) => (open ? 'translateY(0)' : 'translateY(-100%)')};
-    border-radius: 0 0 20px 20px;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
-    opacity: ${({ open }) => (open ? '100%' : '0')};
-    z-index: ${({ open }) => (open ? '1000' : '-1000')};
-
-`;
-
-const CollapseMenuLink = styled.a`
-  color: ${({ theme }) => theme.text_primary};
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
+const MobileLink = styled.a`
+  color: ${({ theme }) => theme.colors?.text || '#e6e6e6'};
+  font-size: 1rem;
   text-decoration: none;
-  text-align: center;
-  width: 100%;
-  padding: 10px 0;
-  :hover {
-    color: ${({ theme }) => theme.primary};
-  }
-  &.active {
-    border-bottom: 2px solid ${({ theme }) => theme.primary};
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors?.primary || '#64ffda'};
   }
 `;
 
 const Navbar = () => {
-  const [open, setOpen] = React.useState(false);
-  const theme = useTheme();
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navItems = ['home', 'skills', 'experience', 'qualifications', 'projects'];
 
   return (
-    <Nav>
-      <NavContainer>
-        <NavLogo></NavLogo>
-        <CollapseIcon>
-          <FaBars onClick={() => setOpen(!open)} />
-        </CollapseIcon>
-        <NavItems>
-        <NavLink
-          to="home"
-          spy={true}
-          smooth={true}
-          offset={-100}
-          duration={100}
-        >
-          Home
-        </NavLink>
-        <NavLink
-          to="skills"
-          spy={true}
-          smooth={true}
-          offset={-100}
-          duration={100}
-        >
-          Skills
-        </NavLink>
-        <NavLink
-          to="experience"
-          spy={true}
-          smooth={true}
-          offset={-100}
-          duration={100}
-        >
-          Experience
-        </NavLink>
-        <NavLink
-          to="qualifications"
-          spy={true}
-          smooth={true}
-          offset={-100}
-          duration={100}
-        >
-          Qualifications
-        </NavLink>
-        <NavLink
-          to="projects"
-          spy={true}
-          smooth={true}
-          offset={-100}
-          duration={100}
-        >
-          Projects
-        </NavLink>
-        </NavItems>
-        <ButtonContainer>
-          <ButtonWrapper>
-            <NavIcon
-              style={{
-                padding: "24px 0px",
-                textAlign: "center",
-                width: "max-content",
-                margin: "0 auto",
-                display: 'flex',
-                alignItems: 'center',
-              }}
-              href='https://github.com/amrabdelwahed'
-              target='_blank'
+    <NavbarContainer
+      scrolled={scrolled}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <Nav>        
+        <NavLinks>
+          {navItems.map((item) => (
+            <NavLink
+              key={item}
+              to={item}
+              spy={true}
+              smooth={true}
+              offset={-100}
+              duration={500}
             >
-                <FaGithub style={{ fontSize: '24px' }} />
-            </NavIcon>
-            <NavIcon
-              style={{
-                padding: "24px 0px",
-                textAlign: "center",
-                width: "max-content",
-                margin: "0 auto",
-                display: 'flex',
-                alignItems: 'center',
-              }}
-              href='https://www.linkedin.com/in/amrabdelwahed/'
-              target='_blank'
+              {item.charAt(0).toUpperCase() + item.slice(1)}
+            </NavLink>
+          ))}
+        </NavLinks>
+
+        <SocialLinks>
+          <SocialLink 
+            href="https://github.com/amrabdelwahed" 
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaGithub />
+          </SocialLink>
+          <SocialLink 
+            href="https://www.linkedin.com/in/amrabdelwahed/" 
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaLinkedin />
+          </SocialLink>
+        </SocialLinks>
+
+        <MenuButton onClick={() => setIsOpen(!isOpen)}>
+          <FaBars />
+        </MenuButton>
+      </Nav>
+
+      <AnimatePresence>
+        {isOpen && (
+          <MobileMenu
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+          >
+            {navItems.map((item) => (
+              <MobileLink
+                key={item}
+                href={`#${item}`}
+                onClick={() => setIsOpen(false)}
+              >
+                {item.charAt(0).toUpperCase() + item.slice(1)}
+              </MobileLink>
+            ))}
+            <SocialLink 
+              href="https://github.com/amrabdelwahed" 
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <FaLinkedin style={{ fontSize: '24px' }} />
-            </NavIcon>
-          </ButtonWrapper>
-        </ButtonContainer>
-      </NavContainer>
-      {
-        open && (
-          <CollapseMenu open={open}>
-            <CollapseMenuLink
-              href='#home'
-              onClick={() => {
-                setOpen(!open);
-              }}
+              <FaGithub />
+            </SocialLink>
+            <SocialLink 
+              href="https://www.linkedin.com/in/amrabdelwahed/" 
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Home
-            </CollapseMenuLink>
-            <CollapseMenuLink
-              href='#skills'
-              onClick={() => {
-                setOpen(!open);
-              }}
-            >
-              Skills
-            </CollapseMenuLink>
-            <CollapseMenuLink
-            href="#experience"
-              onClick={() => {
-                setOpen(!open);
-              }}
-            >
-              Experience
-            </CollapseMenuLink>
-            <CollapseMenuLink
-              href='#qualifications'
-              onClick={() => {
-                setOpen(!open);
-              }}
-            >
-              Qualifications
-            </CollapseMenuLink>
-            <CollapseMenuLink
-              href='#projects'
-              onClick={() => {
-                setOpen(!open);
-              }}
-            >
-              Projects
-            </CollapseMenuLink>
-            <NavIcon
-              style={{
-                padding: "10px 0px",
-                textAlign: "center",
-                width: "max-content",
-                margin: "0 auto",
-                display: 'flex',
-                alignItems: 'center',
-              }}
-              href='https://github.com/amrabdelwahed'
-              target='_blank'
-            >
-                <FaGithub style={{ fontSize: '24px' }} />
-            </NavIcon>
-            <NavIcon
-              style={{
-                padding: "10px 0px",
-                textAlign: "center",
-                width: "max-content",
-                margin: "0 auto",
-                display: 'flex',
-                alignItems: 'center',
-              }}
-              href='https://www.linkedin.com/in/amrabdelwahed/'
-              target='_blank'
-            >
-              <FaLinkedin style={{ fontSize: '24px' }} />
-            </NavIcon>
-          </CollapseMenu>
-      )}
-    </Nav>
+              <FaLinkedin />
+            </SocialLink>
+          </MobileMenu>
+        )}
+      </AnimatePresence>
+    </NavbarContainer>
   );
 };
 
-export default Navbar
+export default Navbar;
