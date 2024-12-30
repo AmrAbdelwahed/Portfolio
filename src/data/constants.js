@@ -7,7 +7,7 @@ export const Bio = {
       "Full Stack Developer.",
     ],
     github: "https://github.com/amrabdelwahed",
-    resume: "https://drive.google.com/file/d/1gSOYhPAP9Zl9uo39kHXBTspHG4PBeC06/view?usp=sharing",
+    resume: "https://drive.google.com/file/d/1GEAD-K4HNvLsbN0_r7JvecZ4N3IwOPZc/view?usp=sharing",
     linkedin: "https://www.linkedin.com/in/amrabdelwahed/",
   };
   
@@ -259,7 +259,7 @@ export const Bio = {
     },
     {
       id: 2,
-      title: "SoccerEdge",
+      title: "SoccerEdge AI",
       date: "Sep 2024 - Dec 2024",
       description:
         "This repository contains a machine learning model designed to predict the outcome of Premier League soccer matches. Utilizing historical data, the model analyzes various factors such as team performance, player statistics, and match conditions to forecast the most likely result",

@@ -130,7 +130,11 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navItems = ['home', 'skills', 'experience', 'qualifications', 'projects'];
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const navItems = ['skills', 'experience', 'education', 'projects'];
 
   return (
     <NavbarContainer
@@ -139,7 +143,10 @@ const Navbar = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <Nav>        
+      <Nav>   
+      <Logo onClick={scrollToTop} style={{ cursor: 'pointer' }}>
+      Back to Top
+        </Logo>     
         <NavLinks>
           {navItems.map((item) => (
             <NavLink
