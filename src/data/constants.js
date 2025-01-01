@@ -242,7 +242,7 @@ export const Bio = {
     {
       id: 1,
       title: "Remmi",
-      date: "May 2023 - July 2024",
+      date: "May 2023 - July 2023",
       description:
         "Remmi is an innovative voice reminder app developed with Swift, designed to help users stay organized effortlessly. Powered by advanced AI technology, Remmi enables users to create and manage audible reminders with natural voice prompts, ensuring they never miss a task or event.",
       image:
@@ -262,7 +262,7 @@ export const Bio = {
       title: "SoccerEdge AI",
       date: "Sep 2024 - Dec 2024",
       description:
-        "This repository contains a machine learning model designed to predict the outcome of Premier League soccer matches. Utilizing historical data, the model analyzes various factors such as team performance, player statistics, and match conditions to forecast the most likely result",
+        "This is deployed web app hosting a machine learning model designed to predict the outcome of Premier League soccer matches. Utilizing historical data, the model analyzes various factors such as team performance, player statistics, and match conditions to forecast the most likely result",
       image:
         require('../images/SoccerEdge.png'),
       tags: [
@@ -277,7 +277,7 @@ export const Bio = {
     },
     {
       id: 3,
-      title: "StreamlinePay (preview)",
+      title: "StreamlinePay",
       date: "Sep 2024 - Dec 2024",
       description:
         "StreamlinePay is a financial transaction management system built with Java, Spring Boot, MongoDB, and Kafka. It allows users to create and manage transactions, with real-time messaging powered by Kafka. Docker is used to containerize the application for easy deployment and scalability. This deployment is a preview.",
@@ -291,7 +291,7 @@ export const Bio = {
         "Docker"
       ],
       category: "web",
-      link: "https://financial-transaction-processing-system.vercel.app/"
+      link: "https://streamlinepay.up.railway.app/"
     }
  
   ];
