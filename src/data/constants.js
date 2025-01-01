@@ -262,7 +262,7 @@ export const Bio = {
       title: "SoccerEdge AI",
       date: "Sep 2024 - Dec 2024",
       description:
-        "This is deployed web app hosting a machine learning model designed to predict the outcome of Premier League soccer matches. Utilizing historical data, the model analyzes various factors such as team performance, player statistics, and match conditions to forecast the most likely result",
+        "This web application hosts a machine learning model built to predict the outcomes of Premier League soccer matches. By analyzing historical data, including team performance, player statistics, and match conditions, the model forecasts the most probable results.",
       image:
         require('../images/SoccerEdge.png'),
       tags: [
