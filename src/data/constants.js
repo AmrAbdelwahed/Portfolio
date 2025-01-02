@@ -273,7 +273,7 @@ export const Bio = {
         "Pandas"
       ],
       category: "web",
-      link: "https://amrabdelwahed-the-football-fortune-teller-app-05nkzh.streamlit.app/"
+      link: "https://socceredge-aigit-g8hpufpivydaypdghquz8r.streamlit.app/"
     },
     {
       id: 3,
