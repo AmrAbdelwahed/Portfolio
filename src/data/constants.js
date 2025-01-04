@@ -257,10 +257,30 @@ export const Bio = {
       category: "mobile",
       link: "https://apps.apple.com/ca/app/remmi/id6499106472"
     },
+
     {
       id: 2,
-      title: "SoccerEdge AI",
+      title: "Flappy Bird AI",
       date: "Sep 2024 - Dec 2024",
+      description:
+      "An AI-powered Flappy Bird simulation where a Neural Network, trained using the NEAT algorithm and genetic algorithms, learns to navigate the game environment. The AI's decision-making is driven by inputs such as bird position, velocity, and pipe proximity. Built with P5.js for rendering and TensorFlow.js for neural networks, the project showcases the evolution of intelligent behavior over generations.",
+      image:
+        require('../images/flappy-bird.jpg'),
+      tags: [
+        "Tensorflow.js",
+        "P5.js",
+        "Neural Networks",
+        "NEAT",
+        "Genetic Algorithms (GA)"
+      ],
+      category: "web",
+      link: "https://flappy-bird-ai-amr-abdelwahed.vercel.app/"
+    },
+
+    {
+      id: 3,
+      title: "SoccerEdge AI",
+      date: "Aug 2024 - Sep 2024",
       description:
         "This web application hosts a machine learning model built to predict the outcomes of Premier League soccer matches. By analyzing historical data, including team performance, player statistics, and match conditions, the model forecasts the most probable results.",
       image:
@@ -276,8 +296,8 @@ export const Bio = {
       link: "https://socceredge-aigit-g8hpufpivydaypdghquz8r.streamlit.app/"
     },
     {
-      id: 3,
-      title: "StreamlinePay",
+      id: 4,
+      title: "Streamline Pay",
       date: "Sep 2024 - Dec 2024",
       description:
         "StreamlinePay is a financial transaction management system built with Java, Spring Boot, MongoDB, and Kafka. It allows users to create and manage transactions, with real-time messaging powered by Kafka. Docker is used to containerize the application for easy deployment and scalability.",
@@ -292,6 +312,8 @@ export const Bio = {
       ],
       category: "web",
       link: "https://streamlinepay.up.railway.app/"
-    }
+    },
+
+    
  
   ];
