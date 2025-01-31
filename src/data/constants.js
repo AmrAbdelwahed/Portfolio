@@ -7,7 +7,7 @@ export const Bio = {
       "Full Stack Developer.",
     ],
     github: "https://github.com/amrabdelwahed",
-    resume: "https://drive.google.com/file/d/1o_96XUo6yFLWXUGh2sHfWwHwQV0nYq6k/view?usp=sharing",
+    resume: "https://drive.google.com/file/d/19-tpExIvrO7jkXKY_ZPuTlkhAh4Rpk5e/view?usp=sharing",
     linkedin: "https://www.linkedin.com/in/amrabdelwahed/",
   };
   
@@ -290,8 +290,7 @@ export const Bio = {
         "TensorFlow",
         "StreamLit",
         "SciKit-Learn",
-        "Pandas",
-        "StreamLit"
+        "Pandas"
       ],
       category: "web",
       link: "https://socceredge-aigit-g8hpufpivydaypdghquz8r.streamlit.app/"
