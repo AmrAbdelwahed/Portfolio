@@ -213,7 +213,7 @@ export const Bio = {
     {
       id: 2,
       img: require('../images/kaneff.png'),
-      position: "Network Analyst Intern",
+      position: "IT Systems Developer Intern",
       date: "January 2024 - April 2024",
       company: "Kaneff Properties",
     },
