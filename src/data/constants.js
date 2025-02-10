@@ -257,9 +257,29 @@ export const Bio = {
       category: "mobile",
       link: "https://apps.apple.com/ca/app/remmi/id6499106472"
     },
-
     {
       id: 2,
+      title: "MockView AI",
+      date: "Jan 2024 - Present",
+      description:
+        "MockViewAI is an AI-powered mock interview platform designed to simulate real-world technical interviews. It generates AI-driven questions, evaluates user responses in real-time, and provides actionable feedback to improve interview readiness. Built with a modern full-stack architecture, MockViewAI ensures a seamless and interactive user experience.",
+      image:
+        require('../images/mockviewai.png'),
+      tags: [
+        "Next.js",
+        "React",
+        "Tailwind CSS",
+        "Node.js",
+        "Drizzle ORM",
+        "PostgreSQL",
+        "Gemini AI",
+        "Clerk"
+      ],
+      category: "web",
+      link: "https://www.mockviewai.online/"
+    },
+    {
+      id: 3,
       title: "Flappy Bird AI",
       date: "Sep 2024 - Dec 2024",
       description:
@@ -278,7 +298,7 @@ export const Bio = {
     },
 
     {
-      id: 3,
+      id: 4,
       title: "SoccerEdge AI",
       date: "Aug 2024 - Sep 2024",
       description:
@@ -296,7 +316,7 @@ export const Bio = {
       link: "https://socceredge-aigit-g8hpufpivydaypdghquz8r.streamlit.app/"
     },
     {
-      id: 4,
+      id: 5,
       title: "Streamline Pay",
       date: "Sep 2024 - Dec 2024",
       description:
