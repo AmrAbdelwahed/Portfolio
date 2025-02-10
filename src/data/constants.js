@@ -262,7 +262,7 @@ export const Bio = {
       title: "MockView AI",
       date: "Jan 2024 - Present",
       description:
-        "MockViewAI is an AI-powered mock interview platform designed to simulate real-world technical interviews. It generates AI-driven questions, evaluates user responses in real-time, and provides actionable feedback to improve interview readiness. Built with a modern full-stack architecture, MockViewAI ensures a seamless and interactive user experience.",
+        "MockView AI is an AI-powered mock interview platform designed to simulate real-world technical interviews. It generates AI-driven questions, evaluates user responses in real-time, and provides actionable feedback to improve interview readiness. Built with a modern full-stack architecture, MockViewAI ensures a seamless and interactive user experience.",
       image:
         require('../images/mockviewai.png'),
       tags: [
