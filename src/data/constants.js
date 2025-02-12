@@ -7,7 +7,7 @@ export const Bio = {
       "Full Stack Developer.",
     ],
     github: "https://github.com/amrabdelwahed",
-    resume: "https://drive.google.com/file/d/1ozViwXc65Y1t0WAf3W40AeWh3Qa5ebFq/view?usp=sharing",
+    resume: "https://drive.google.com/file/d/1KyLiSgdmkG5vszx44z95vwHHDj5WeUdY/view?usp=sharing",
     linkedin: "https://www.linkedin.com/in/amrabdelwahed/",
   };
   
@@ -260,7 +260,7 @@ export const Bio = {
     {
       id: 2,
       title: "MockView AI",
-      date: "Jan 2024 - Present",
+      date: "Jan 2025 - Feb 2025",
       description:
         "MockView AI is an AI-powered mock interview platform designed to simulate real-world technical interviews. It generates AI-driven questions, evaluates user responses in real-time, and provides actionable feedback to improve interview readiness. Built with a modern full-stack architecture, MockViewAI ensures a seamless and interactive user experience.",
       image:
