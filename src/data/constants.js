@@ -7,7 +7,7 @@ export const Bio = {
       "Full Stack Developer.",
     ],
     github: "https://github.com/amrabdelwahed",
-    resume: "https://drive.google.com/file/d/1KyLiSgdmkG5vszx44z95vwHHDj5WeUdY/view?usp=sharing",
+    resume: "https://drive.google.com/file/d/1GGCutJF89TjDg3HHTkTyHuVupo41M9Y4/view?usp=sharing",
     linkedin: "https://www.linkedin.com/in/amrabdelwahed/",
   };
   
