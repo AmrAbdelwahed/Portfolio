@@ -7,7 +7,7 @@ export const Bio = {
       "Full Stack Developer.",
     ],
     github: "https://github.com/amrabdelwahed",
-    resume: "https://docs.google.com/document/d/1VOt7Sr-MQP_lEnNhjVqQL760tiN1VuIB5ub_6BRTsEY/edit?usp=sharing",
+    resume: "https://drive.google.com/file/d/1trjIs5C2ZsuADuF4oliXtBWx58rlBzJt/view?usp=sharing",
     linkedin: "https://www.linkedin.com/in/amrabdelwahed/",
   };
   
@@ -198,20 +198,27 @@ export const Bio = {
   export const experience = [
     {
       id: 0,
+      img: require('../images/DHL_Express_logo_rgb (2).png'),
+      position: "Data Engineer",
+      date: "May 2025 - Present",
+      company: "DHL Express CA",
+    },
+    {
+      id: 1,
       img: require('../images/sunlife.png'),
       position: "Network Automation Analyst Intern",
       date: "May 2024 - Aug 2024",
       company: "Sun Life Financial",
     },
     {
-      id: 1,
+      id: 2,
       img: require('../images/sunlife.png'),
       position: "Network Analyst Intern",
       date: "September 2024 - December 2024",
       company: "Sun Life Financial",
     },
     {
-      id: 2,
+      id: 3,
       img: require('../images/kaneff.png'),
       position: "IT Systems Developer Intern",
       date: "January 2024 - April 2024",
