@@ -4,15 +4,15 @@ import styled from 'styled-components'
 import ProjectCard from '../Card/ProjectCard'
 import { projects } from '../../data/constants'
 
-const Container = styled.div`
-    background: ${({ theme }) => theme.Bg};
+const Container = styled.section`
+    background: ${({ theme }) => theme.bg};
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
     z-index: 1;
     align-items: center;
-    padding-top: 50px;
+    padding: 48px 24px 24px;
 `;
 
 const Wrapper = styled.div`
@@ -22,20 +22,22 @@ const Wrapper = styled.div`
     align-items: center;
     flex-direction: column;
     width: 100%;
-    max-width: 1350px;
-    padding: 10px 0px 100px 0;
+    max-width: 1120px;
+    padding: 10px 0px 92px;
     gap: 12px;
     @media (max-width: 960px) {
         flex-direction: column;
     }
 `;
 
-const Title = styled.div`
-font-size: 42px;
-text-align: center;
-font-weight: 600;
+const Title = styled.h2`
+font-size: clamp(34px, 5vw, 48px);
+text-align: left;
+align-self: flex-start;
+font-weight: 650;
+letter-spacing: -.045em;
 margin-top: 20px;
-  color: ${({ theme }) => theme.white};
+  color: ${({ theme }) => theme.text_primary};
   @media (max-width: 768px) {
       margin-top: 12px;
       font-size: 32px;
@@ -44,10 +46,10 @@ margin-top: 20px;
 
 const ToggleButtonGroup = styled.div`
     display: flex;
-    border: 1.5px solid ${({ theme }) => theme.primary};
+    border: 1px solid rgb(230 238 235 / .18);
     color: ${({ theme }) => theme.white};
     font-size: 16px;
-    border-radius: 12px;
+    border-radius: 4px;
     font-weight: 500;
     margin: 22px 0px;
     @media (max-width: 768px) {
@@ -55,18 +57,24 @@ const ToggleButtonGroup = styled.div`
     }
 `
 
-const ToggleButton = styled.div`
+const ToggleButton = styled.button`
+    color: ${({ theme }) => theme.text_primary};
+    font: inherit;
+    border: 0;
+    background: transparent;
     padding: 10px 24px;
-    border-radius: 6px;
+    border-radius: 2px;
     cursor: pointer;
-    ${({ active, theme }) =>
-        active && `
-    background: ${theme.primary + 20};
+    ${({ $active, theme }) =>
+        $active && `
+    background: rgb(100 255 218 / .12);
+    color: ${theme.primary};
     `
     }
     &:hover {
-        background: ${({ theme }) => theme.primary + 8};
+        background: rgb(100 255 218 / .08);
     }
+    &:focus-visible { outline: 2px solid ${({ theme }) => theme.primary}; outline-offset: 2px; }
     @media (max-width: 768px) {
         padding: 8px 12px;
         border-radius: 4px;
@@ -79,11 +87,11 @@ const Divider = styled.div`
 
 
 const CardContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 28px;
-    flex-wrap: wrap;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    @media (max-width: 720px) { grid-template-columns: 1fr; }
 `;
 
 const Projects = () => {
@@ -93,33 +101,17 @@ const Projects = () => {
       <Wrapper>
         <Title>Projects</Title>
         <ToggleButtonGroup >
-          {toggle === 'all' ?
-            <ToggleButton active value="all" onClick={() => setToggle('all')}>All</ToggleButton>
-            :
-            <ToggleButton value="all" onClick={() => setToggle('all')}>All</ToggleButton>
-          }
+          <ToggleButton type="button" $active={toggle === 'all'} aria-pressed={toggle === 'all'} onClick={() => setToggle('all')}>All</ToggleButton>
           <Divider />
-          {toggle === 'web' ?
-            <ToggleButton active value="web" onClick={() => setToggle('web')}>Web</ToggleButton>
-            :
-            <ToggleButton value="web" onClick={() => setToggle('web')}>Web</ToggleButton>
-          }
+          <ToggleButton type="button" $active={toggle === 'web'} aria-pressed={toggle === 'web'} onClick={() => setToggle('web')}>Web</ToggleButton>
           <Divider />
-          {toggle === 'mobile' ?
-            <ToggleButton active value="mobile" onClick={() => setToggle('mobile')}>Mobile</ToggleButton>
-            :
-            <ToggleButton value="mobile" onClick={() => setToggle('mobile')}>Mobile</ToggleButton>
-          }
+          <ToggleButton type="button" $active={toggle === 'mobile'} aria-pressed={toggle === 'mobile'} onClick={() => setToggle('mobile')}>Mobile</ToggleButton>
         </ToggleButtonGroup>
         <CardContainer>
-          {toggle === 'all' && projects
-            .map((project) => (
-              <ProjectCard project={project}/>
-            ))}
           {projects
-            .filter((item) => item.category === toggle)
+            .filter((item) => toggle === 'all' || item.category === toggle)
             .map((project) => (
-              <ProjectCard project={project}/>
+              <ProjectCard key={project.id} project={project}/>
             ))}
         </CardContainer>
       </Wrapper>

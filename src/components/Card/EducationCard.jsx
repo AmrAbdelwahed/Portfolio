@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { HiOutlineAcademicCap, HiCalendar, HiChevronDown } from 'react-icons/hi';
+import { HiOutlineAcademicCap, HiCalendar } from 'react-icons/hi';
 
 const Card = styled(motion.div)`
-  width: 450px;
+  width: 100%;
+  max-width: 450px;
   border-radius: 10px;
   border: 0.1px solid ${({ theme }) => theme.primary};
   box-shadow: 10px 10px 30px rgba(100, 255, 218, 0.05),
@@ -15,12 +16,12 @@ const Card = styled(motion.div)`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  background: ${({ theme }) => theme.Bg};
+  background: ${({ theme }) => theme.surface};
   
   @media only screen and (max-width: 768px){
     padding: 12px;
     gap: 8px;
-    width: 300px;
+    width: 100%;
   }
 `;
 
@@ -100,20 +101,6 @@ const Description = styled(motion.div)`
   }
 `;
 
-const ExpandButton = styled(motion.button)`
-  background: none;
-  border: none;
-  color: ${({ theme }) => theme.primary};
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 8px;
-  font-size: 12px;
-  margin-top: 8px;
-  align-self: flex-end;
-`;
-
 const Achievements = styled(motion.ul)`
   list-style-type: none;
   padding: 0;
@@ -135,35 +122,11 @@ const Achievement = styled(motion.li)`
 `;
 
 const EducationCard = ({ education }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
   const cardVariants = {
     hover: {
       y: -5,
       transition: {
         duration: 0.2
-      }
-    }
-  };
-
-  const expandButtonVariants = {
-    initial: { rotate: 0 },
-    expanded: { rotate: 180 }
-  };
-
-  const descriptionVariants = {
-    hidden: { height: 0, opacity: 0 },
-    visible: { 
-      height: "auto",
-      opacity: 1,
-      transition: {
-        height: {
-          duration: 0.3
-        },
-        opacity: {
-          duration: 0.3,
-          delay: 0.1
-        }
       }
     }
   };
@@ -180,6 +143,7 @@ const EducationCard = ({ education }) => {
       <Top>
         <Image 
           src={education.img}
+          alt={education.school}
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.2 }}
         />
@@ -198,15 +162,8 @@ const EducationCard = ({ education }) => {
         </Body>
       </Top>
 
-      <motion.div
-        initial="hidden"
-        animate={isExpanded ? "visible" : "hidden"}
-        variants={descriptionVariants}
-      >
-        <Description>
-          {education.description}
-        </Description>
-        {education.achievements && (
+      {education.description && <Description>{education.description}</Description>}
+      {education.achievements && (
           <Achievements>
             {education.achievements.map((achievement, index) => (
               <Achievement
@@ -220,7 +177,6 @@ const EducationCard = ({ education }) => {
             ))}
           </Achievements>
         )}
-      </motion.div>
     </Card>
   );
 };

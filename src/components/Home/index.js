@@ -1,393 +1,121 @@
 import React from 'react';
-import { useCallback } from 'react';
-import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
-import { motion } from "framer-motion";
 import styled from 'styled-components';
-import Typewriter from 'typewriter-effect';
 import { Bio } from '../../data/constants';
 import HomeImg from '../../images/amr.jpg';
 
-const HomeContainer = styled.div`
-  background: ${({ theme }) => theme.Bg};
+const Hero = styled.section`
   position: relative;
-  height: calc(100vh - 100px);
-  display: flex;
-  justify-content: center;
-  @media (max-width: 960px) {
-    padding: 66px 16px;
-  }
-  @media (max-width: 640) {
-    padding: 12px 6px;
-  }
-  z-index: 1;
-`;
-
-export const HomeBg = styled.div`
-  position: absolute;
-  display: flex;
-  justify-content: end;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  max-width: 1360px;
-  overflow: hidden;
-  padding: 0 30px;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
-
-  @media (max-width: 960px) {
-    justify-content: center;
-    padding: 0 0px;
-  }
-`;
-
-export const HomeInnerContainer = styled.div`
-  position: relative;
-  display: flex;
+  isolation: isolate;
+  min-height: min(820px, 100svh);
+  padding: 112px 28px 72px;
+  display: grid;
   align-items: center;
-  width: 100%;
-  max-width: 1100px;
+  overflow: hidden;
+  background: ${({ theme }) => theme.bg};
 
-  @media (max-width: 960px) {
-    flex-direction: column;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: linear-gradient(rgb(100 255 218 / .035) 1px, transparent 1px), linear-gradient(90deg, rgb(100 255 218 / .035) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: linear-gradient(to bottom, black, transparent 85%);
   }
+  @media (max-width: 720px) { padding: 110px 22px 64px; min-height: auto; }
 `;
 
-export const HomeLeftContainer = styled.div`
-  width: 100%;
-  order: 1;
-  margin-bottom: 100px;
-  @media (max-width: 960px) {
-    order: 2;
-    margin-bottom: 130px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  @media (max-width: 640px) {
-    order: 2;
-    margin-bottom: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 1rem;
-  }
+const Inner = styled.div`
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(230px, .75fr);
+  align-items: center;
+  gap: clamp(36px, 8vw, 112px);
+  @media (max-width: 720px) { grid-template-columns: 1fr; gap: 34px; }
 `;
 
-export const HomeRightContainer = styled.div`
-  width: 100%;
-  display: flex;
-  order: 2;
-  justify-content: end;
-  gap: 12px;
-  margin-bottom: 100px;
-  @media (max-width: 960px) {
-    order: 1;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 50px;
-  }
-
-  @media (max-width: 640px) {
-    margin-bottom: 50px;
-  }
-`;
-
-const Img = styled.img`
-  position: relative;
-  width: 100%;
-  height: 100%;
-  max-width: 350px;
-  max-height: 350px;
-  margin-right: 25px;
-  border-radius: 50%;
-  border: 2px solid ${({ theme }) => theme.primary};
-  box-shadow: 10px 10px 30px rgba(100, 255, 218, 0.075),
-                -10px -10px 30px rgba(100, 255, 218, 0.075);
-
-  @media (max-width: 768px) {
-    max-width: 350;
-    max-height: 350;
-    margin: 0px;
-  }
-
-  @media (max-width: 640px) {
-    max-width: 250px;
-    max-height: 250px;
-    margin: 0px;
-  }
-`;
-
-const Subtitle = styled.div`
-font-weight: 400;
-font-size: 28px;
-color: ${({ theme }) => theme.white};
-line-height: 68px;
-@media (max-width: 960px) {
-  text-align: center;
-}
-
-@media (max-width: 640px) {
-  font-size: 40px;
-  line-height: 48px;
-  margin-bottom: 8px;
-}
-@media (max-width: 360px) {
-  font-size: 20px;
-  line-height: 48px;
-  margin-bottom: 8px;
-}
-`;
-
-const Title = styled.div`
-  font-weight: 700;
-  font-size: 64px;
-  font-family: 'Cinzel', serif;
-  margin: 10px 0px;
+const Copy = styled.div`max-width: 680px; order: 1; @media (max-width: 720px) { order: 2; }`;
+const Eyebrow = styled.p`
   color: ${({ theme }) => theme.primary};
-  line-height: 68px;
-  @media (max-width: 960px) {
-    text-align: center;
-  }
-
-  @media (max-width: 640px) {
-    font-size: 40px;
-    line-height: 48px;
-    margin-bottom: 8px;
-  }
-  @media (max-width: 360px) {
-    font-size: 32px;
-    line-height: 48px;
-    margin-bottom: 8px;
-  }
+  font: 600 13px/1.4 'Courier New', monospace;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin: 0 0 24px;
+  display: flex; align-items: center; gap: 12px;
+  &::before { content: ''; width: 28px; height: 1px; background: currentColor; }
 `;
-
-const TextLoop = styled.div`
-  font-weight: 400;
-  font-size: 28px;
-  display: flex;
-  gap: 12px;
+const Title = styled.h1`
   color: ${({ theme }) => theme.text_primary};
-  line-height: 68px;
-  @media (max-width: 960px) {
-    text-align: center;
-  }
-  @media (max-width: 640px) {
-    font-size: 22px;
-    line-height: 48px;
-    margin-bottom: 16px;
-  }
-  @media (max-width: 360px) {
-    font-size: 16px;
-    line-height: 48px;
-    margin-bottom: 16px;
-  }
+  font-size: clamp(48px, 7vw, 82px);
+  letter-spacing: -.065em;
+  line-height: .98;
+  font-weight: 700;
+  margin: 0;
+  span { color: ${({ theme }) => theme.primary}; }
+  @media (max-width: 420px) { font-size: 44px; }
+`;
+const Role = styled.p`
+  margin: 24px 0 0;
+  color: ${({ theme }) => theme.text_primary};
+  font-size: clamp(19px, 2.4vw, 25px);
+  line-height: 1.5;
+  font-weight: 500;
+  span { color: ${({ theme }) => theme.text_secondary}; font-weight: 400; }
+`;
+const Intro = styled.p`
+  max-width: 58ch;
+  color: ${({ theme }) => theme.text_secondary};
+  font-size: 16px;
+  line-height: 1.8;
+  margin: 18px 0 0;
+`;
+const Actions = styled.div`display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px;`;
+const Action = styled.a`
+  min-height: 48px;
+  padding: 0 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid ${({ primary, theme }) => primary ? theme.primary : 'rgb(230 238 235 / .22)'};
+  background: ${({ primary }) => primary ? 'rgb(100 255 218 / .08)' : 'transparent'};
+  color: ${({ primary, theme }) => primary ? theme.primary : theme.text_primary};
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color .18s ease, border-color .18s ease, transform .18s ease;
+  &:hover { background: rgb(100 255 218 / .12); border-color: ${({ theme }) => theme.primary}; transform: translateY(-2px); }
+  &:focus-visible { outline: 2px solid ${({ theme }) => theme.primary}; outline-offset: 4px; }
+  @media (prefers-reduced-motion: reduce) { transition: none; &:hover { transform: none; } }
+`;
+const PortraitWrap = styled.div`
+  width: min(100%, 320px);
+  justify-self: end;
+  position: relative;
+  order: 2;
+  &::before { content: ''; position: absolute; inset: 18px -18px -18px 18px; border: 1px solid rgb(100 255 218 / .55); z-index: -1; }
+  @media (max-width: 720px) { width: min(220px, 65vw); justify-self: start; margin-left: 12px; order: 1; }
+`;
+const Portrait = styled.img`
+  display: block; width: 100%; aspect-ratio: 1; object-fit: cover; object-position: center 35%;
+  filter: saturate(.78); border: 1px solid rgb(100 255 218 / .24);
 `;
 
-const Span = styled.span`
-  color: ${({ theme }) => theme.primary};
-  cursor: pointer;
-`;
-
-const HomeButton = styled.a`
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-    text-decoration: none;
-    text-align: center;
-    padding: 12px 24px;
-    margin-top: 20px;
-    color: ${({ theme }) => theme.white};
-    border-radius: 30px;
-    cursor: pointer;
-    font-size: 20px;
-    font-weight: 400;
-    transition: all 0.2s ease-in-out !important;
-    background: transparent;
-    border: 2px solid #64ffda;
-    box-shadow: 10px 10px 30px rgba(100, 255, 218, 0.075),
-                -10px -10px 30px rgba(100, 255, 218, 0.075);
-    transform-origin: center;
-    &:hover {
-        background: linear-gradient(225deg, #64ffda 0%, #64a4ff 100%);
-        border: 2px solid transparent;
-        transition: all 0.4s ease-in-out;
-                    filter: brightness(1);
-    }
-
-    @media (max-width: 640px) {
-        padding: 12px 24px;
-        font-size: 18px;
-    }
-`;
-
-// Add ParticlesContainer to ensure particles are visible
-const ParticlesContainer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-`;
-
-const ButtonWrapper = styled.div`
-    
-    display: flex;
-    gap: 20px;  
-`;
-
-
-const Home = () => {
-  const particlesInit = useCallback(async (engine) => {
-    await loadFull(engine);
-  }, []);
-
-  const particlesConfig = {
-    fullScreen: true,
-    particles: {
-      number: {
-        value: 100,  // Increased number of particles
-        density: {
-          enable: true,
-          value_area: 1000
-        }
-      },
-      color: {
-        value: "#64ffda"
-      },
-      links: {
-        enable: true,
-        color: "#64ffda",
-        opacity: 0.4,  // Increased opacity
-        width: 1,
-        distance: 150  // Increased distance between particles
-      },
-      move: {
-        enable: true,
-        speed: 2,  // Increased speed
-        direction: "none",
-        random: true,
-        straight: false,
-        outModes: {
-          default: "bounce"
-        }
-      },
-      size: {
-        value: 2  // Slightly larger particles
-      },
-      opacity: {
-        value: 0.8  // Increased opacity
-      }
-    },
-    interactivity: {
-      events: {
-        onHover: {
-          enable: true,
-          mode: "grab"
-        },
-        onClick: {
-          enable: true,
-          mode: "push"
-        }
-      },
-      modes: {
-        grab: {
-          distance: 140,
-          links: {
-            opacity: 1
-          }
-        },
-        push: {
-          quantity: 4
-        }
-      }
-    },
-    detectRetina: true
-  };
-
-  return (
-    <div className="relative h-screen w-full overflow-hidden">
-      <ParticlesContainer>
-        <Particles
-          id="tsparticles"
-          init={particlesInit}
-          options={particlesConfig}
-          style={{
-            width: '100%',
-            height: '100%',
-            position: 'absolute',
-            top: 0,
-            left: 0
-          }}
-        />
-      </ParticlesContainer>
-      
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="relative z-10"
-      >
-        <HomeContainer>
-          <HomeInnerContainer>
-            <HomeLeftContainer>
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                <Subtitle>Hello, my name is<br /></Subtitle>
-                <Title>{Bio.name}</Title>
-                <TextLoop>
-                  I am a
-                  <Span>
-                    <Typewriter
-                      options={{
-                        strings: Bio.roles,
-                        autoStart: true,
-                        loop: true,
-                      }}
-                    />
-                  </Span>
-                </TextLoop>
-                <ButtonWrapper>
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <HomeButton href={Bio.resume} target='display'>View Resume</HomeButton>
-                  </motion.div>
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <HomeButton href='mailto:amrabdelwahed00@gmail.com' target='display'>Contact Me</HomeButton>
-                  </motion.div>
-                </ButtonWrapper>
-              </motion.div>
-            </HomeLeftContainer>
-            <HomeRightContainer>
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-              >
-                <Img src={HomeImg} alt="Home-image" />
-              </motion.div>
-            </HomeRightContainer>
-          </HomeInnerContainer>
-        </HomeContainer>
-      </motion.div>
-    </div>
-  );
-};
+const Home = () => (
+  <Hero id="home" aria-labelledby="hero-title">
+    <Inner>
+      <Copy>
+        <Eyebrow>Software · Data · Applied AI</Eyebrow>
+        <Title id="hero-title">Hello, I’m<br /><span>{Bio.name}</span></Title>
+        <Role>Engineer building reliable software<br /><span>and useful data products.</span></Role>
+        <Intro>I’m a software and data engineer focused on turning complex problems into thoughtful, dependable products—from full-stack applications to machine learning systems.</Intro>
+        <Actions>
+          <Action primary href={Bio.resume} target="_blank" rel="noopener noreferrer">View résumé <span aria-hidden="true">↗</span></Action>
+          <Action href={`mailto:${Bio.email || 'amrabdelwahed00@gmail.com'}`}>Get in touch <span aria-hidden="true">↗</span></Action>
+        </Actions>
+      </Copy>
+      <PortraitWrap><Portrait src={HomeImg} alt="Amr Abdelwahed" /></PortraitWrap>
+    </Inner>
+  </Hero>
+);
 
 export default Home;

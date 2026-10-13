@@ -1,26 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { HiBriefcase, HiCalendar, HiChevronDown, HiDocument } from 'react-icons/hi';
+import { HiBriefcase, HiCalendar, HiDocument } from 'react-icons/hi';
 
 const Card = styled(motion.div)`
-  width: 450px;
-  border-radius: 10px;
-  border: 0.1px solid ${({ theme }) => theme.primary};
-  box-shadow: 10px 10px 30px rgba(100, 255, 218, 0.05),
-              -10px -10px 30px rgba(100, 255, 218, 0.05);
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid ${({ theme }) => theme.border};
   padding: 16px;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  background: ${({ theme }) => theme.Bg};
+  background: ${({ theme }) => theme.surface};
+  &:hover { border-color: rgb(100 255 218 / .45); }
   
   @media only screen and (max-width: 768px){
     padding: 12px;
     gap: 8px;
-    width: 300px;
+    width: 100%;
   }
 `;
 
@@ -131,50 +130,12 @@ const Document = styled(motion.a)`
   }
 `;
 
-const ExpandButton = styled(motion.button)`
-  background: none;
-  border: none;
-  color: ${({ theme }) => theme.primary};
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 8px;
-  font-size: 12px;
-  margin-top: 8px;
-  align-self: flex-end;
-`;
-
 const ExperienceCard = ({ experience }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
   const cardVariants = {
     hover: {
       y: -5,
       transition: {
         duration: 0.2
-      }
-    }
-  };
-
-  const expandButtonVariants = {
-    initial: { rotate: 0 },
-    expanded: { rotate: 180 }
-  };
-
-  const contentVariants = {
-    hidden: { height: 0, opacity: 0 },
-    visible: { 
-      height: "auto",
-      opacity: 1,
-      transition: {
-        height: {
-          duration: 0.3
-        },
-        opacity: {
-          duration: 0.3,
-          delay: 0.1
-        }
       }
     }
   };
@@ -210,14 +171,7 @@ const ExperienceCard = ({ experience }) => {
         </Body>
       </Top>
 
-      <motion.div
-        initial="hidden"
-        animate={isExpanded ? "visible" : "hidden"}
-        variants={contentVariants}
-      >
-        <Description>
-          {experience.description}
-        </Description>
+      {experience.description && <Description>{experience.description}</Description>}
         
         {experience.skills && (
           <Skills>
@@ -245,7 +199,6 @@ const ExperienceCard = ({ experience }) => {
             View Certificate
           </Document>
         )}
-      </motion.div>
     </Card>
   );
 };

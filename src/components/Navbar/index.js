@@ -11,7 +11,7 @@ const NavbarContainer = styled(motion.nav)`
   top: 0;
   left: 0;
   z-index: 50;
-  background: ${({ scrolled }) => scrolled ? 'rgba(25, 25, 36, 0.9)' : 'transparent'};
+  background: ${({ scrolled }) => scrolled ? 'rgba(11, 17, 19, 0.94)' : 'transparent'};
   backdrop-filter: ${({ scrolled }) => scrolled ? 'blur(10px)' : 'none'};
   transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
 `;
@@ -27,7 +27,7 @@ const Nav = styled.div`
 `;
 
 const Logo = styled.a`
-  color: ${({ theme }) => theme.colors?.primary || '#64ffda'};
+  color: ${({ theme }) => theme.primary};
   font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
@@ -36,7 +36,7 @@ const Logo = styled.a`
 const NavLinks = styled.div`
   display: flex;
   align-items: center;
-  gap: 48px;
+  gap: 32px;
 
   @media (max-width: 768px) {
     display: none;
@@ -44,14 +44,14 @@ const NavLinks = styled.div`
 `;
 
 const NavLink = styled(ScrollLink)`
-  color: ${({ theme }) => theme.colors?.text || '#e6e6e6'};
+  color: ${({ theme }) => theme.text_primary};
   font-size: 1rem;
   text-decoration: none;
   cursor: pointer;
   transition: color 0.2s ease;
 
   &:hover {
-    color: ${({ theme }) => theme.colors?.primary || '#64ffda'};
+    color: ${({ theme }) => theme.primary};
   }
 `;
 
@@ -66,18 +66,18 @@ const SocialLinks = styled.div`
 `;
 
 const SocialLink = styled.a`
-  color: ${({ theme }) => theme.colors?.text || '#e6e6e6'};
+  color: ${({ theme }) => theme.text_primary};
   font-size: 1.5rem;
   transition: color 0.2s ease;
 
   &:hover {
-    color: ${({ theme }) => theme.colors?.primary || '#64ffda'};
+    color: ${({ theme }) => theme.primary};
   }
 `;
 
 const MenuButton = styled.button`
   display: none;
-  color: ${({ theme }) => theme.colors?.text || '#e6e6e6'};
+  color: ${({ theme }) => theme.text_primary};
   font-size: 1.5rem;
   background: none;
   border: none;
@@ -85,7 +85,7 @@ const MenuButton = styled.button`
   transition: color 0.2s ease;
 
   &:hover {
-    color: ${({ theme }) => theme.colors?.primary || '#64ffda'};
+    color: ${({ theme }) => theme.primary};
   }
 
   @media (max-width: 768px) {
@@ -98,7 +98,7 @@ const MobileMenu = styled(motion.div)`
   top: 80px;
   left: 0;
   width: 100%;
-  background: rgba(25, 25, 36, 0.95);
+  background: rgba(11, 17, 19, 0.98);
   backdrop-filter: blur(10px);
   padding: 24px;
   display: flex;
@@ -108,13 +108,13 @@ const MobileMenu = styled(motion.div)`
 `;
 
 const MobileLink = styled.a`
-  color: ${({ theme }) => theme.colors?.text || '#e6e6e6'};
+  color: ${({ theme }) => theme.text_primary};
   font-size: 1rem;
   text-decoration: none;
   transition: color 0.2s ease;
 
   &:hover {
-    color: ${({ theme }) => theme.colors?.primary || '#64ffda'};
+    color: ${({ theme }) => theme.primary};
   }
 `;
 
@@ -144,8 +144,8 @@ const Navbar = () => {
       transition={{ duration: 0.5 }}
     >
       <Nav>   
-      <Logo onClick={scrollToTop} style={{ cursor: 'pointer' }}>
-      Back to Top
+      <Logo href="#home" onClick={scrollToTop} aria-label="Amr Abdelwahed — back to top">
+      AA<span aria-hidden="true">.</span>
         </Logo>     
         <NavLinks>
           {navItems.map((item) => (
@@ -167,6 +167,7 @@ const Navbar = () => {
             href="https://github.com/amrabdelwahed" 
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="GitHub profile"
           >
             <FaGithub />
           </SocialLink>
@@ -174,19 +175,22 @@ const Navbar = () => {
             href="https://www.linkedin.com/in/amrabdelwahed/" 
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="LinkedIn profile"
           >
             <FaLinkedin />
           </SocialLink>
         </SocialLinks>
 
-        <MenuButton onClick={() => setIsOpen(!isOpen)}>
-          <FaBars />
+        <MenuButton onClick={() => setIsOpen(!isOpen)} aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={isOpen} aria-controls="mobile-navigation">
+          <FaBars aria-hidden="true" />
         </MenuButton>
       </Nav>
 
       <AnimatePresence>
         {isOpen && (
           <MobileMenu
+            id="mobile-navigation"
+            aria-label="Mobile navigation"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -205,6 +209,7 @@ const Navbar = () => {
               href="https://github.com/amrabdelwahed" 
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="GitHub profile"
             >
               <FaGithub />
             </SocialLink>
@@ -212,6 +217,7 @@ const Navbar = () => {
               href="https://www.linkedin.com/in/amrabdelwahed/" 
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="LinkedIn profile"
             >
               <FaLinkedin />
             </SocialLink>

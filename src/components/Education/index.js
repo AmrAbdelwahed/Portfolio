@@ -6,14 +6,14 @@ import { education } from '../../data/constants';
 import EducationCard from '../Card/EducationCard';
 import { HiAcademicCap } from 'react-icons/hi';
 
-const Container = styled.div`
+const Container = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
   z-index: 1;
   align-items: center;
-  padding: 50px 0;
+  padding: 36px 24px;
   
   @media (max-width: 960px) {
     padding: 30px 0;
@@ -27,8 +27,8 @@ const Wrapper = styled.div`
   align-items: center;
   flex-direction: column;
   width: 100%;
-  max-width: 1350px;
-  padding: 40px 0;
+  max-width: 1120px;
+  padding: 20px 0;
   gap: 12px;
   
   @media (max-width: 960px) {
@@ -37,11 +37,13 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled(motion.div)`
-  font-size: 42px;
-  text-align: center;
-  font-weight: 600;
+  font-size: clamp(34px, 5vw, 48px);
+  text-align: left;
+  align-self: flex-start;
+  font-weight: 650;
+  letter-spacing: -.045em;
   margin-top: 20px;
-  color: ${({ theme }) => theme.white};
+  color: ${({ theme }) => theme.text_primary};
   display: flex;
   align-items: center;
   gap: 12px;
@@ -97,7 +99,7 @@ const TimelineDot = styled(motion.div)`
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  cursor: pointer;
+  pointer-events: none;
   
   &:hover {
     transform: translateX(-50%) scale(1.2);

@@ -8,6 +8,7 @@ import Education from './components/Education';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Projects from './components/Projects';
 import Experience from './components/Experience';
+import { MotionConfig } from 'framer-motion';
 
 const Body = styled.div`
   background-color: ${({ theme }) => theme.bg};
@@ -18,16 +19,18 @@ const Body = styled.div`
 function App() {
   return (
     <ThemeProvider theme={darkTheme}>
-      <Router>
-        <Navbar />
-        <Body>
-          <Home />
+      <MotionConfig reducedMotion="user">
+        <Router>
+          <Navbar />
+          <Body>
+            <Home />
             <Skills />
             <Experience />
             <Education />
             <Projects />
-        </Body>
-      </Router>
+          </Body>
+        </Router>
+      </MotionConfig>
     </ThemeProvider>
   );
 }

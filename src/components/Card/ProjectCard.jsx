@@ -1,140 +1,42 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
-const Button = styled.button`
-    display: none;
-    width: 100%;
-    padding: 10px;
-    background-color: ${({ theme }) => theme.white};
-    color: ${({ theme }) => theme.text_black};
-    font-size: 14px;
-    font-weight: 700;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.8s ease-in-out;
-`
-const Card = styled.div`
-    width: 350px;
-    height: 650px;
-    cursor: pointer;
-    border: 0.1px solid ${({ theme }) => theme.white};
-    border-radius: 10px;
-    overflow: hidden;
-    padding: 26px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    transition: all 0.3s ease-in-out;
-    &:hover {
-        transform: translateY(-10px);
-        border: 0.1px solid ${({ theme }) => theme.primary};
-        box-shadow: 10px 10px 30px rgba(100, 255, 218, 0.05),
-                -10px -10px 30px rgba(100, 255, 218, 0.05); 
-        filter: brightness(1.1);
-    }
-    &:hover ${Button} {
-        display: block;
-    }
-`
+const Card = styled.article`
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: ${({ theme }) => theme.surface};
+  border: 1px solid ${({ theme }) => theme.border};
+  transition: border-color .18s ease, transform .18s ease;
+  &:hover { border-color: rgb(100 255 218 / .55); transform: translateY(-3px); }
+  @media (prefers-reduced-motion: reduce) { transition: none; &:hover { transform: none; } }
+`;
 
 const Image = styled.img`
-    width: 100%;
-    height: 220px;
-    object-fit: cover; /* Ensures the image covers the set dimensions */
-    background-color: ${({ theme }) => theme.white};
-    border-radius: 10px;
-    box-shadow: 0 0 16px 2px rgba(0,0,0,0.3);
+  display: block; width: 100%; aspect-ratio: 16 / 8.5; object-fit: cover;
+  background: ${({ theme }) => theme.bg}; border-bottom: 1px solid ${({ theme }) => theme.border};
 `;
+const Content = styled.div`padding: 22px 24px 24px; display: flex; flex: 1; flex-direction: column; align-items: flex-start; @media (max-width: 480px) { padding: 18px; }`;
+const Meta = styled.p`color: ${({ theme }) => theme.primary}; font: 12px/1.5 'Courier New', monospace; margin: 0 0 7px; letter-spacing: .035em;`;
+const Title = styled.h3`color: ${({ theme }) => theme.text_primary}; font-size: 24px; letter-spacing: -.035em; margin: 0;`;
+const Description = styled.p`color: ${({ theme }) => theme.text_secondary}; font-size: 14px; line-height: 1.75; margin: 12px 0 18px;`;
+const Tags = styled.ul`list-style: none; margin: auto 0 20px; padding: 0; display: flex; flex-wrap: wrap; gap: 7px;`;
+const Tag = styled.li`color: ${({ theme }) => theme.text_secondary}; font: 11px/1.2 'Courier New', monospace; padding: 5px 8px; border: 1px solid ${({ theme }) => theme.border};`;
+const Link = styled.a`color: ${({ theme }) => theme.primary}; font-size: 13px; font-weight: 600; text-decoration: none; &:hover { text-decoration: underline; text-underline-offset: 4px; } &:focus-visible { outline: 2px solid ${({ theme }) => theme.primary}; outline-offset: 4px; }`;
 
+const ProjectCard = ({ project }) => (
+  <Card>
+    <Image src={project.image} alt={`${project.title} project preview`} loading="lazy" />
+    <Content>
+      <Meta>{project.category === 'mobile' ? 'MOBILE APPLICATION' : 'WEB APPLICATION'} · {project.date}</Meta>
+      <Title>{project.title}</Title>
+      <Description>{project.description}</Description>
+      <Tags aria-label={`${project.title} technologies`}>
+        {project.tags?.map((tag) => <Tag key={tag}>{tag}</Tag>)}
+      </Tags>
+      <Link href={project.link} target="_blank" rel="noopener noreferrer">Explore project <span aria-hidden="true">↗</span></Link>
+    </Content>
+  </Card>
+);
 
-const Tags = styled.div`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 4px;
-`
-
-const Tag = styled.span`
-    font-size: 12px;
-    font-weight: 400;
-    color: ${({ theme }) => theme.white};
-    border: 0.1px solid ${({ theme }) => theme.primary};
-    padding: 4px 8px;
-    border-radius: 10px;
-`
-
-const Details = styled.div`
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 0px;
-    padding: 0px 2px;
-    max-height: 500px; /* Example value */
-`;
-
-const Title = styled.div`
-    font-size: 20px;
-    font-weight: 600;
-    color: ${({ theme }) => theme.white};
-    overflow: hidden;
-    display: -webkit-box;
-    max-width: 100%;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-`
-
-const Date = styled.div`
-    font-size: 12px;
-    margin-left: 2px;
-    font-weight: 400;
-    color: ${({ theme }) => theme.text_secondary};
-    @media only screen and (max-width: 768px){
-        font-size: 10px;
-    }
-`
-
-
-const Description = styled.div`
-    font-weight: 400;
-    color: ${({ theme }) => theme.white};
-    overflow: hidden;
-    margin-top: 12px;
-    display: -webkit-box;
-    max-width: 100%;
-    max-height: none; /* No longer limit the height */
-    line-height: 1.6; /* Slightly increase line height for better readability */
-    -webkit-line-clamp: 9s; /* Remove clamping */
-    -webkit-box-orient: vertical;
-`;
-
-
-
-const ProjectCard = ({ project }) => {
-    const handleCardClick = () => {
-        window.open(project.link, '_blank');
-      };
-    
-    return (
-        <Card onClick={handleCardClick}>
-          <Image src={project.image} />
-          <Tags>
-            {project.tags?.slice(0, 9).map((tag, index) => (
-                <Tag key={index}>{tag}</Tag>
-            ))}
-
-          </Tags>
-          <Details>
-            <Title>{project.title}</Title>
-            <Date>{project.date}</Date>
-            <Description>{project.description}</Description>
-          </Details>
-        </Card>
-    );
-  };
-
-export default ProjectCard
+export default ProjectCard;

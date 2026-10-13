@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import { skills } from '../../data/constants';
 import { motion } from 'framer-motion';
 
-const Container = styled.div`
+const Container = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
   z-index: 1;
   align-items: center;
+  padding: 24px 24px 72px;
 `;
 
 const Wrapper = styled.div`
@@ -19,19 +20,21 @@ const Wrapper = styled.div`
   align-items: center;
   flex-direction: column;
   width: 100%;
-  max-width: 1100px;
+  max-width: 1120px;
   gap: 12px;
   @media (max-width: 960px) {
     flex-direction: column;
   }
 `;
 
-const Title = styled.div`
-  font-size: 42px;
-  text-align: center;
-  font-weight: 600;
+const Title = styled.h2`
+  font-size: clamp(34px, 5vw, 48px);
+  text-align: left;
+  align-self: flex-start;
+  letter-spacing: -.045em;
+  font-weight: 650;
   margin-top: 20px;
-  color: ${({ theme }) => theme.white};
+  color: ${({ theme }) => theme.text_primary};
   @media (max-width: 768px) {
     margin-top: 12px;
     font-size: 32px;
@@ -43,24 +46,21 @@ const SkillsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-top: 30px;
-  gap: 30px;
-  justify-content: center;
+  gap: 18px;
+  justify-content: flex-start;
 `;
 
 const Skill = styled(motion.div)`
   width: 100%;
-  max-width: 500px;
-  background: ${({ theme }) => theme.Bg};
-  border: 0.1px solid ${({ theme }) => theme.primary};
-  box-shadow: 10px 10px 30px rgba(100, 255, 218, 0.05),
-    -10px -10px 30px rgba(100, 255, 218, 0.05);
-  border-radius: 16px;
-  padding: 18px 36px;
-  transition: transform 0.3s, box-shadow 0.3s;
+  max-width: 540px;
+  background: ${({ theme }) => theme.surface};
+  border: 1px solid ${({ theme }) => theme.border};
+  border-radius: 4px;
+  padding: 24px;
+  transition: border-color .2s ease;
 
   &:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 0px 20px rgba(100, 255, 218, 0.2);
+    border-color: rgb(100 255 218 / .5);
   }
 
   @media (max-width: 768px) {
@@ -78,12 +78,12 @@ const SkillTitle = styled.h2`
   font-weight: 600;
   color: ${({ theme }) => theme.white};
   margin-bottom: 20px;
-  text-align: center;
+  text-align: left;
 `;
 
 const SkillList = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 12px;
   margin-bottom: 20px;
@@ -93,10 +93,10 @@ const SkillItem = styled(motion.div)`
   font-size: 16px;
   font-weight: 400;
   color: ${({ theme }) => theme.white};
-  border: 1px solid ${({ theme }) => theme.primary};
+  border: 1px solid ${({ theme }) => theme.border};
   background: ${({ theme }) => theme.bg};
-  border-radius: 12px;
-  padding: 12px 16px;
+  border-radius: 3px;
+  padding: 9px 11px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -104,9 +104,7 @@ const SkillItem = styled(motion.div)`
   transition: transform 0.2s, background 0.3s;
 
   &:hover {
-    background: ${({ theme }) => theme.primary};
-    color: ${({ theme }) => theme.bg};
-    transform: scale(1.1);
+    border-color: ${({ theme }) => theme.primary};
   }
 
   @media (max-width: 768px) {
@@ -143,10 +141,10 @@ const Skills = () => {
                 {skill.skills.map((item, subIndex) => (
                   <SkillItem
                     key={subIndex}
-                    whileHover={{ scale: 1.15 }}
+                    whileHover={{ y: -1 }}
                     transition={{ type: 'spring', stiffness: 300 }}
                   >
-                    <SkillImage src={item.image} />
+                    <SkillImage src={item.image} alt="" aria-hidden="true" />
                     {item.name}
                   </SkillItem>
                 ))}
